@@ -19,8 +19,8 @@ jobs:
         with:
           node-version: 16
       - run: npm install "https://github.com/iterative/cml#d001-watermark-spaces" --save
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+#      - name: Setup tmate session
+#        uses: mxschmitt/action-tmate@v3
       - name: comment
         run: |
           ./comment.sh "First comment"
