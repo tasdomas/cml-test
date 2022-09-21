@@ -15,4 +15,4 @@ jobs:
       - name: comment
         run: |
           ./comment.sh "First comment"
-          cml comment create --update report.md
+          npm cml comment create --update report.md
