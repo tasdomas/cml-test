@@ -2,7 +2,7 @@
 cat <<EOF > report.md
 # $1
 
-This is a cml-created comment.
+This is a comment created by cml.
 
 
 EOF
