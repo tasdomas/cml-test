@@ -6,4 +6,6 @@ This is a comment created by cml.
 
 ![Bug](./img.png)
 
+$(date)
+
 EOF
