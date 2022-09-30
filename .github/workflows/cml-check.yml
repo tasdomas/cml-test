@@ -26,3 +26,4 @@ jobs:
           sleep 10
           ./comment.sh "Second comment"
           cml comment create --publish --update --pr --commentLabel=two report.md
+          cml comment create --publish --update --pr --commentLabel="{run} run-specific" report.md
