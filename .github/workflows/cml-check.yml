@@ -20,6 +20,8 @@ jobs:
           node-version: 16
       - run: npm install -g "https://github.com/iterative/cml#d001-watermark-spaces" --save
       - name: comment
+        env:
+          repo_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           ./comment.sh "First comment"
           cml comment create --publish --update --watermarkLabel one report.md
