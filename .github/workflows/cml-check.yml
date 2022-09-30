@@ -22,7 +22,7 @@ jobs:
       - name: comment
         run: |
           ./comment.sh "First comment"
-          cml comment create --publish --update --pr --watermarkLabel one report.md
+          cml comment create --publish --update --pr --commentLabel=one report.md
           sleep 10
           ./comment.sh "Second comment"
-          cml comment create --publish --update --pr --watermarkLabel two report.md
+          cml comment create --publish --update --pr --commentLabel=two report.md
