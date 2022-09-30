@@ -10,7 +10,7 @@ jobs:
     environment: test
     runs-on: ubuntu-latest
     env:
-      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -20,8 +20,6 @@ jobs:
           node-version: 16
       - run: npm install -g "https://github.com/iterative/cml#d001-watermark-spaces" --save
       - name: comment
-        env:
-          repo_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           ./comment.sh "First comment"
           cml comment create --publish --update --watermarkLabel one report.md
