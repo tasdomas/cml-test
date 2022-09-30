@@ -4,5 +4,6 @@ cat <<EOF > report.md
 
 This is a comment created by cml.
 
+![Bug](./img.png)
 
 EOF

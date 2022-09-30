@@ -17,4 +17,6 @@ jobs:
       - name: comment
         run: |
           ./comment.sh "First comment"
-          npx cml comment create --update report.md
+          cml comment create --publish --update --watermarkLabel one report.md
+          ./comment.sh "Second comment"
+          cml comment create --publish --update --watermarkLabel two report.md
