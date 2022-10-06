@@ -25,12 +25,11 @@ for depth in range(2, 5):
 
     acc = clf.score(X_test, y_test)
     if acc > best_accuracy:
-        best_dept = depth
+        best_depth = depth
         best_estimator = clf
         best_accuracy = acc
 
-    print(acc)
-    # Plot it
+    # Confusion matrix
     disp = ConfusionMatrixDisplay.from_estimator(
         clf, X_test, y_test, normalize="true", cmap=plt.cm.Blues
     )
@@ -46,7 +45,7 @@ for depth in range(2, 5):
     # Pretend it's a lengthy training.
     time.sleep(5)
 
-# Write final report.
+# Write final report
 with open("final-report.md", "w") as report:
     disp = ConfusionMatrixDisplay.from_estimator(
         best_estimator, X_test, y_test, normalize="true", cmap=plt.cm.Blues
