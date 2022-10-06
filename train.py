@@ -1,6 +1,7 @@
 import json
 import os
 from textwrap import dedent
+import time
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import ConfusionMatrixDisplay
@@ -42,6 +43,8 @@ for depth in range(2, 5):
           Accuracy: {acc}
           ![Confusion Matrix]({plotfile})
         '''))
+    # Pretend it's a lengthy training.
+    time.sleep(5)
 
 # Write final report.
 with open("final-report.md", "w") as report:
