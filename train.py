@@ -1,8 +1,10 @@
+import json
+import os
+from textwrap import dedent
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
-import json
-import os
 import numpy as np
 
 # Read in data
@@ -11,12 +13,21 @@ y_train = np.genfromtxt("data/train_labels.csv")
 X_test = np.genfromtxt("data/test_features.csv")
 y_test = np.genfromtxt("data/test_labels.csv")
 
+best_depth = 2
+best_accuracy = 0
+best_estimator = None
+
 # Fit a model
 for depth in range(2, 5):
     clf = RandomForestClassifier(max_depth=depth)
     clf.fit(X_train, y_train)
 
     acc = clf.score(X_test, y_test)
+    if acc > best_accuracy:
+        best_dept = depth
+        best_estimator = clf
+        best_accuracy = acc
+
     print(acc)
     # Plot it
     disp = ConfusionMatrixDisplay.from_estimator(
@@ -25,6 +36,24 @@ for depth in range(2, 5):
     plotfile = f"plot-{depth}.png"
     plt.savefig(plotfile)
     with open("report.md", "a") as outfile:
-        outfile.write(f"# Forest depth: {depth}\n\n")
-        outfile.write(f"Accuracy: {acc}\n")
-        outfile.write(f"![Confusion Matrix]({plotfile})\n\n\n")
+        outfile.write(dedent(f'''
+          # Forest depth: {depth}
+
+          Accuracy: {acc}
+          ![Confusion Matrix]({plotfile})
+        '''))
+
+# Write final report.
+with open("final-report.md", "w") as report:
+    disp = ConfusionMatrixDisplay.from_estimator(
+        best_estimator, X_test, y_test, normalize="true", cmap=plt.cm.Blues
+    )
+    plt.savefig("plot-best.png")
+
+    report.write(dedent(f'''
+      # Best result:
+
+      Depth: {best_depth}
+      Accuracy: {best_accuracy}
+      ![Confusion Matrix](./plot-best.png)
+    '''))
