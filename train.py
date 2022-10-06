@@ -19,7 +19,7 @@ best_accuracy = 0
 best_estimator = None
 
 # Fit a model
-for depth in range(2, 5):
+for depth in range(2, 7):
     clf = RandomForestClassifier(max_depth=depth)
     clf.fit(X_train, y_train)
 
