@@ -12,7 +12,7 @@ X_test = np.genfromtxt("data/test_features.csv")
 y_test = np.genfromtxt("data/test_labels.csv")
 
 # Fit a model
-for depth in range(2, 6):
+for depth in range(2, 5):
     clf = RandomForestClassifier(max_depth=depth)
     clf.fit(X_train, y_train)
 
@@ -22,8 +22,9 @@ for depth in range(2, 6):
     disp = ConfusionMatrixDisplay.from_estimator(
         clf, X_test, y_test, normalize="true", cmap=plt.cm.Blues
     )
-    plt.savefig("plot.png")
-    with open("metrics.txt", "w") as outfile:
-        outfile.write("Forest depth: " + str(depth) + "\n")
-        outfile.write("Accuracy: " + str(acc) + "\n")
-        outfile.write("![Confusion Matrix](./plot.png)\n")
+    plotfile = f"plot-{depth}.png"
+    plt.savefig(plotfile)
+    with open("report.md", "a") as outfile:
+        outfile.write(f"# Forest depth: {depth}\n\n")
+        outfile.write(f"Accuracy: {acc}\n")
+        outfile.write(f"![Confusion Matrix]({plotfile})\n\n\n")
