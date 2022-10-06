@@ -41,21 +41,23 @@ for depth in range(2, 5):
 
           Accuracy: {acc}
           ![Confusion Matrix]({plotfile})
+
         '''))
+
+    # Update final report
+    with open("final-report.md", "w") as report:
+        disp = ConfusionMatrixDisplay.from_estimator(
+            best_estimator, X_test, y_test, normalize="true", cmap=plt.cm.Blues
+        )
+        plt.savefig("plot-best.png")
+
+        report.write(dedent(f'''
+        # Best result:
+
+        Depth: {best_depth}
+        Accuracy: {best_accuracy}
+        ![Confusion Matrix](./plot-best.png)
+        '''))
+
     # Pretend it's a lengthy training.
     time.sleep(5)
-
-# Write final report
-with open("final-report.md", "w") as report:
-    disp = ConfusionMatrixDisplay.from_estimator(
-        best_estimator, X_test, y_test, normalize="true", cmap=plt.cm.Blues
-    )
-    plt.savefig("plot-best.png")
-
-    report.write(dedent(f'''
-      # Best result:
-
-      Depth: {best_depth}
-      Accuracy: {best_accuracy}
-      ![Confusion Matrix](./plot-best.png)
-    '''))
