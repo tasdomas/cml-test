@@ -19,7 +19,7 @@ jobs:
         run: |
           # Your ML workflow goes here
           pip install -r requirements.txt
-          cml publish plot-best.png
-          cml comment create --pr --update --watch --publish --comment-tag="iterations" report.md &
-          cml comment create --pr --update --watch --publish --comment-tag="{run}-final-results" final-report.md &
+          #cml comment create --pr --update --watch --publish --comment-tag="iterations" report.md &
+          #cml comment create --pr --update --watch --publish --comment-tag="{run}-final-results" final-report.md &
           python train.py
+          cml publish plot-best.png
