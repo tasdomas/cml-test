@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm install -g "https://github.com/iterative/cml#d007-deprecation-notice" --save
+      - run: npm install -g "https://github.com/iterative/cml#d001-watermark-spaces" --save
       - name: Train model
         run: |
           # Your ML workflow goes here
