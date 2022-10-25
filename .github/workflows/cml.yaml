@@ -21,5 +21,5 @@ jobs:
           pip install -r requirements.txt
           cml publish plot-best.png
           cml comment create --pr --update --watch --publish --comment-tag="iterations" report.md &
-          cml comment create --pr --update --watch --publish --comment-tag="{run}-final-results" final-report.md &
+          cml comment create --pr --update --watch --publish --comment-tag="{run}-final-results_2" final-report.md &
           python train.py
