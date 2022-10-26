@@ -41,6 +41,19 @@ jobs:
             echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
             cml comment update --pr --watermark-title "${comment}" ./comment.md
           fi
+      - name: Add comment with underscore
+        run: |
+          echo "### Custom Water Mark Test" > ./comment.md
+          echo asterisk > ./comment.md
+          comment='_ comment'
+          if [ "${{ github.event.action }}" == "opened" ]; then
+            echo "PR Opened" >> ./comment.md
+            cml comment create --pr --watermark-title "${comment}" ./comment.md
+          fi
+          if [ "${{ github.event.action }}" == "synchronize" ]; then
+            echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
+            cml comment update --pr --watermark-title "${comment}" ./comment.md
+          fi
       - name: Add comment with slash
         run: |
           echo "### Custom Water Mark Test" > ./comment.md
