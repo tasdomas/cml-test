@@ -1,4 +1,4 @@
-name: Example workflow
+name: Example workflow cml#1173
 on: [pull_request]
 env:
   REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -14,7 +14,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm install -g "https://github.com/iterative/cml#d001-watermark-spaces" --save
+#      - run: npm install -g "https://github.com/iterative/cml#d001-watermark-spaces" --save
+      - run: npm install -g "https://github.com/tasdomas/cml#test-watermarks" --save
       - name: Train model
         run: |
           # Your ML workflow goes here
