@@ -8,6 +8,7 @@ jobs:
     # optionally use a convenient Ubuntu LTS + DVC + CML image
     # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
+      - run: echo '${{ toJSON(github) }}'
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
