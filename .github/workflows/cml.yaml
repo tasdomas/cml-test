@@ -1,5 +1,5 @@
 name: Example workflow cml#1173
-on: [pull_request]
+on: [pull_request, push]
 env:
   REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
@@ -10,113 +10,15 @@ jobs:
     steps:
       - run: echo '${{ toJSON(github) }}'
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-#      - run: npm install -g "https://github.com/iterative/cml#d001-watermark-spaces" --save
-      - run: npm install -g "https://github.com/tasdomas/cml#test-watermarks" --save
-      - name: Add comment
+      - run: npm install -g "https://github.com/iterative/cml#feature-comment-target" --save
+      - name: Add commit comment
         run: |
-          echo "### Custom Water Mark Test" > ./comment.md
-          echo workflow_name > ./comment.md
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "PR Opened" >> ./comment.md
-            cml comment create --pr --watermark-title "{workflow}" ./comment.md
-          fi
-          if [ "${{ github.event.action }}" == "synchronize" ]; then
-            echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
-            cml comment update --pr --watermark-title "{workflow}" ./comment.md
-          fi
-      - name: Add comment with asterisk
+          echo "### Custom commit comment" > ./comment.md
+          cml comment create --target='commit' ./comment.md
+      - name: Auto comment
         run: |
-          echo "### Custom Water Mark Test" > ./comment.md
-          echo asterisk > ./comment.md
-          comment='* comment'
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "PR Opened" >> ./comment.md
-            cml comment create --pr --watermark-title "${comment}" ./comment.md
-          fi
-          if [ "${{ github.event.action }}" == "synchronize" ]; then
-            echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
-            cml comment update --pr --watermark-title "${comment}" ./comment.md
-          fi
-      - name: Add comment with backslash
-        run: |
-          echo "### Custom Water Mark Test" > ./comment.md
-          echo asterisk > ./comment.md
-          comment='\ comment'
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "PR Opened" >> ./comment.md
-            cml comment create --pr --watermark-title "${comment}" ./comment.md
-          fi
-          if [ "${{ github.event.action }}" == "synchronize" ]; then
-            echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
-            cml comment update --pr --watermark-title "${comment}" ./comment.md
-          fi
-      - name: Add comment with underscore
-        run: |
-          echo "### Custom Water Mark Test" > ./comment.md
-          echo asterisk > ./comment.md
-          comment='_ comment'
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "PR Opened" >> ./comment.md
-            cml comment create --pr --watermark-title "${comment}" ./comment.md
-          fi
-          if [ "${{ github.event.action }}" == "synchronize" ]; then
-            echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
-            cml comment update --pr --watermark-title "${comment}" ./comment.md
-          fi
-      - name: Add comment with slash
-        run: |
-          echo "### Custom Water Mark Test" > ./comment.md
-          echo slash > ./comment.md
-          comment='/ comment'
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "PR Opened" >> ./comment.md
-            cml comment create --pr --watermark-title "${comment}" ./comment.md
-          fi
-          if [ "${{ github.event.action }}" == "synchronize" ]; then
-            echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
-            cml comment update --pr --watermark-title "${comment}" ./comment.md
-          fi
-      - name: Add comment with parens
-        run: |
-          echo "### Custom Water Mark Test" > ./comment.md
-          echo parens > ./comment.md
-          comment='(comment)'
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "PR Opened" >> ./comment.md
-            cml comment create --pr --watermark-title "${comment}" ./comment.md
-          fi
-          if [ "${{ github.event.action }}" == "synchronize" ]; then
-            echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
-            cml comment update --pr --watermark-title "${comment}" ./comment.md
-          fi
-      - name: Add comment with brackets
-        run: |
-          echo "### Custom Water Mark Test" > ./comment.md
-          echo brackets > ./comment.md
-          comment='[comment]'
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "PR Opened" >> ./comment.md
-            cml comment create --pr --watermark-title "${comment}" ./comment.md
-          fi
-          if [ "${{ github.event.action }}" == "synchronize" ]; then
-            echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
-            cml comment update --pr --watermark-title "${comment}" ./comment.md
-          fi
-      - name: Add comment with angle brackets
-        run: |
-          echo "### Custom Water Mark Test" > ./comment.md
-          echo angle_brackets > ./comment.md
-          comment='<comment>'
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "PR Opened" >> ./comment.md
-            cml comment create --pr --watermark-title "${comment}" ./comment.md
-          fi
-          if [ "${{ github.event.action }}" == "synchronize" ]; then
-            echo "PR commit count: $(git rev-list origin/main.. --count)" >> ./comment.md
-            cml comment update --pr --watermark-title "${comment}" ./comment.md
-          fi
+          echo "### Auto comment" > ./comment.md
+          cml comment create ./comment.md
