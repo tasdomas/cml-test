@@ -22,3 +22,7 @@ jobs:
         run: |
           echo "### Auto comment" > ./comment.md
           cml comment create ./comment.md
+      - name: Check
+        run: |
+          echo "### This is a check" > ./comment.md
+          cml check create ./comment.md
