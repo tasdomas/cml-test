@@ -20,3 +20,7 @@ jobs:
         run: echo '${{ toJSON(strategy) }}'
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
+  te:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo --target pr#1
