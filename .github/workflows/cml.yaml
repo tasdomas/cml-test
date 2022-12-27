@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm install -g "https://github.com/iterative/cml#feature-comment-target" --save
+      - run: npm install -g "https://github.com/iterative/cml#master" --save
       - name: Add commit comment
         run: |
           echo "### Custom commit comment" > ./comment.md
